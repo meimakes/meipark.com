@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mei Park - Building Systems, Raising Humans</title>
+    <!-- Basic Meta Tags -->
+<meta name="description" content="Mei Park - Developer turned SAHM. Building apps, raising humans, and creating simple systems for motherhood. Creator of SystemsMama.com, and MinimalistMama.net.">
+<meta name="keywords" content="Mei Park, Systems Mama, MeiMakes, Minimalist Mama, developer, SAHM, parenting, coding, motherhood">
+<meta name="author" content="Mei Park">
+<meta name="robots" content="index, follow">
+<meta name="language" content="English">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meipark.com/">
+<meta property="og:title" content="Mei Park - Building Systems, Raising Humans">
+<meta property="og:description" content="Developer turned SAHM. $10k hackathon winner. Teaching my toddler to code. Strong opinions on IKEA storage & toddler APIs.">
+<meta property="og:image" content="https://meipark.com/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Mei Park">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://meipark.com/">
+<meta name="twitter:title" content="Mei Park - Building Systems, Raising Humans">
+<meta name="twitter:description" content="Developer turned SAHM. $10k hackathon winner. Teaching my toddler to code. Strong opinions on IKEA storage & toddler APIs.">
+<meta name="twitter:image" content="https://meipark.com/preview.png">
+<meta name="twitter:site" content="@meimakes">
+<meta name="twitter:creator" content="@meimakes">
+
+<!-- Emoji Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩🏻‍💻</text></svg>">
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#ff6ec7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#60efff" media="(prefers-color-scheme: dark)">
+
+<!-- Additional Meta -->
+<link rel="canonical" href="https://meipark.com/">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mei Park">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+    :root {
+        --primary: #2563eb;
+        --accent: #ff6ec7;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --grid: #e2e8f0;
+        --border: #000000;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #1e293b;
+        --text-secondary: #64748b;
+        --code-bg: #fef3c7;
+        --code-text: #ff6ec7;
+        --status-bg: #f0fdf4;
+        --status-border: #86efac;
+        --status-text: #16a34a;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --primary: #60efff;
+            --accent: #ff6ec7;
+            --dark: #ffffff;
+            --light: #000000;
+            --gray: #a0a0a0;
+            --grid: #1a1a1a;
+            --border: #000000;
+            --bg: #000000;
+            --card-bg: #0a0a0a;
+            --text: #ffffff;
+            --text-secondary: #a0a0a0;
+            --code-bg: #2a0845;
+            --code-text: #b4ff39;
+            --status-bg: #0f172a;
+            --status-border: #60efff;
+            --status-text: #60efff;
+        }
+    }
+
+    body {
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+        background: var(--bg);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+    }
+
+    /* Grid background pattern */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            linear-gradient(var(--grid) 1px, transparent 1px),
+            linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 30px 30px;
+        opacity: 0.5;
+        z-index: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        body::before {
+            opacity: 0.3;
+        }
+    }
+
+    /* Floating code snippets */
+    .code-float {
+        position: fixed;
+        font-family: 'SF Mono', monospace;
+        font-size: 12px;
+        color: var(--text-secondary);
+        opacity: 0.3;
+        animation: drift 20s infinite linear;
+        z-index: 1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .code-float {
+            opacity: 0.2;
+            color: var(--primary);
+        }
+    }
+
+    .code-float:nth-child(1) {
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+    }
+
+    .code-float:nth-child(2) {
+        top: 70%;
+        right: 10%;
+        animation-delay: 7s;
+    }
+
+    .code-float:nth-child(3) {
+        bottom: 20%;
+        left: 15%;
+        animation-delay: 14s;
+    }
+
+    @keyframes drift {
+        0%, 100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+            transform: translate(30px, -20px) rotate(1deg);
+        }
+        50% {
+            transform: translate(-20px, 30px) rotate(-1deg);
+        }
+        75% {
+            transform: translate(20px, 20px) rotate(2deg);
+        }
+    }
+
+    .container {
+        max-width: 520px;
+        width: 100%;
+        z-index: 10;
+        position: relative;
+    }
+
+    .terminal-window {
+        background: var(--card-bg);
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.6s ease-out;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .terminal-window {
+            box-shadow: 0 0 40px rgba(96, 239, 255, 0.1);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px) rotate(-1deg);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+    }
+
+    .terminal-header {
+        background: var(--border);
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .terminal-dots {
+        display: flex;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .dot:nth-child(1) { background: #ef4444; }
+    .dot:nth-child(2) { background: #f59e0b; }
+    .dot:nth-child(3) { background: #10b981; }
+
+    @media (prefers-color-scheme: dark) {
+        .dot:nth-child(1) { background: #ff6ec7; }
+        .dot:nth-child(2) { background: #b4ff39; }
+        .dot:nth-child(3) { background: #60efff; }
+    }
+
+    .terminal-title {
+        flex: 1;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-family: -apple-system, system-ui, sans-serif;
+        letter-spacing: 0.5px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .terminal-title {
+            color: #808080;
+        }
+    }
+
+    .content {
+        padding: 40px 30px;
+    }
+
+    .ascii-art {
+        font-family: 'SF Mono', monospace;
+        font-size: 10px;
+        line-height: 1.2;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 30px;
+        white-space: pre;
+        letter-spacing: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .ascii-art {
+            text-shadow: 0 0 10px var(--primary);
+        }
+    }
+
+    .profile-header {
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: block;
+        border: 3px solid var(--border);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .profile-image {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(255, 110, 199, 0.2);
+        }
+    }
+
+    .name {
+        font-family: -apple-system, system-ui, sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text);
+        margin-bottom: 8px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 32px;
+        background: var(--accent);
+        margin-left: 2px;
+        animation: blink 1s infinite;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .cursor {
+            box-shadow: 0 0 10px var(--accent);
+        }
+    }
+
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+
+    .bio {
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-top: 12px;
+        font-family: -apple-system, system-ui, sans-serif;
+    }
+
+    .bio code {
+        background: var(--code-bg);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 12px;
+        color: var(--code-text);
+        font-family: 'SF Mono', monospace;
+    }
+
+    .link-section {
+        margin-bottom: 30px;
+    }
+
+    .section-label {
+        font-size: 11px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-label::before,
+    .section-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--grid);
+    }
+
+    .link-card {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        margin-bottom: 12px;
+        background: var(--card-bg);
+        border: 2px solid transparent;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        position: relative;
+        font-family: -apple-system, system-ui, sans-serif;
+    }
+
+    .link-card::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 6px;
+        padding: 2px;
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .link-card:hover::before {
+        opacity: 1;
+    }
+
+    .link-card:hover {
+        transform: translateX(4px);
+        box-shadow: -4px 0 0 var(--accent);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .link-card {
+            border: 2px solid var(--grid);
+        }
+    }
+
+    .link-emoji {
+        font-size: 24px;
+        margin-right: 16px;
+    }
+
+    .link-content {
+        flex: 1;
+    }
+
+    .link-title {
+        color: var(--text);
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 2px;
+    }
+
+    .link-desc {
+        color: var(--text-secondary);
+        font-size: 13px;
+    }
+
+    .link-arrow {
+        color: var(--text-secondary);
+        transition: transform 0.2s ease;
+    }
+
+    .link-card:hover .link-arrow {
+        transform: translateX(4px);
+    }
+
+    .social-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+
+    .social-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 12px;
+        background: var(--card-bg);
+        border: 2px solid var(--grid);
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-family: -apple-system, system-ui, sans-serif;
+    }
+
+    .social-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 4px 0 var(--accent);
+    }
+
+    .social-card:hover .social-icon {
+        fill: var(--accent);
+    }
+
+    .social-icon {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 8px;
+        fill: var(--text);
+        transition: fill 0.2s ease;
+    }
+
+    .social-name {
+        color: var(--text);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .footer {
+        margin-top: 35px;
+        padding-top: 25px;
+        border-top: 2px dashed var(--grid);
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-family: 'SF Mono', monospace;
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        padding: 6px 12px;
+        background: var(--status-bg);
+        border: 1px solid var(--status-border);
+        border-radius: 20px;
+        color: var(--status-text);
+        font-size: 11px;
+    }
+
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--status-text);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .name {
+            font-size: 28px;
+        }
+
+        .ascii-art {
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- Floating code elements -->
+    <div class="code-float">const life = { code, kids };</div>
+    <div class="code-float">// TODO: sleep</div>
+    <div class="code-float">if (chaos) { makeSystem(); }</div>
+
+<div class="container">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="terminal-title">~/meipark</div>
+        </div>
+
+        <div class="content">
+            <div class="ascii-art">╔══════════════════╗
+```
+
+║  SYSTEMS + CODE  ║
+╚══════════════════╝</div>
+
+```
+            <div class="profile-header">
+                <img src="mei.jpg" 
+                     alt="Mei Park" 
+                     class="profile-image">
+                <h1 class="name">Mei Park<span class="cursor"></span></h1>
+                <p class="bio">
+                    10yr dev → SAHM. <code>$10k</code> hackathon winner.<br>
+                    Teaching my toddler to <code>git commit</code> before bedtime<br>
+                    Strong opinions on IKEA storage & toddler APIs
+                </p>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    Currently shipping v2.0 (baby #2)
+                </div>
+            </div>
+
+            <div class="link-section">
+                <div class="section-label">Projects</div>
+                
+                <a href="https://meimakes.com" class="link-card">
+                    <span class="link-emoji">👩‍💻</span>
+                    <div class="link-content">
+                        <div class="link-title">MeiMakes.com</div>
+                        <div class="link-desc">Building and shipping in public</div>
+                    </div>
+                    <span class="link-arrow">→</span>
+                </a>
+
+                <a href="https://systemsmama.com" class="link-card">
+                    <span class="link-emoji">🎯</span>
+                    <div class="link-content">
+                        <div class="link-title">Systems Mama</div>
+                        <div class="link-desc">Habits, hacks & simple systems</div>
+                    </div>
+                    <span class="link-arrow">→</span>
+                </a>
+
+                <a href="https://minimalistmama.net" class="link-card">
+                    <span class="link-emoji">✨</span>
+                    <div class="link-content">
+                        <div class="link-title">Minimalist Mama</div>
+                        <div class="link-desc">Less toys, more joy</div>
+                    </div>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+
+            <div class="link-section">
+                <div class="section-label">Find Me</div>
+                
+                <div class="social-grid">
+                    <a href="https://github.com/meimakes" class="social-card">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span class="social-name">GitHub</span>
+                    </a>
+
+                    <a href="https://x.com/meimakes" class="social-card">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                        <span class="social-name">X</span>
+                    </a>
+
+                    <a href="https://medium.com/@meimakes" class="social-card">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                        </svg>
+                        <span class="social-name">Medium</span>
+                    </a>
+
+                    <a href="https://meimakes.substack.com" class="social-card">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM12 16.918L3.925 21.37V10.812h16.15v10.558L12 16.918z"/>
+                        </svg>
+                        <span class="social-name">Substack</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>// Built between naps and snacks</p>
+                <p>// Powered by coffee & chaos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
